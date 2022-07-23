@@ -29,5 +29,3 @@ def call_data_MNIST(batch_size_trainset, batch_size_testset):
 
     return L
 
-call_data_MNIST(100,100)
-

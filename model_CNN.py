@@ -8,7 +8,7 @@ class CNN(torch.nn.Module):
     def __init__(self):
         super(CNN, self).__init__()
         self.keep_prob = 0.5
-        # L1 ImgIn shape=(?, 32, 32, 3) //for cifar 100
+        # L1 ImgIn shape=(?, 32, 32, 3) //for cifar 100 // MNIST (?, 28,28,1)
         #    Conv     -> (?, 32, 32, 32)
         #    Pool     -> (?, 16, 16, 32)
         self.layer1 = torch.nn.Sequential(
@@ -31,14 +31,14 @@ class CNN(torch.nn.Module):
             torch.nn.MaxPool2d(kernel_size=2, stride=2, padding=1))
 
         # L4 FC 4x4x128 inputs -> 625 outputs
-        self.fc1 = torch.nn.Linear(5*5*128, 625, bias=True)
+        self.fc1 = torch.nn.Linear(5*5*128, 625, bias=True) # mnist : 4*4*128 ,
         torch.nn.init.xavier_uniform_(self.fc1.weight)
         self.layer4 = torch.nn.Sequential(
             self.fc1,
             torch.nn.ReLU(),
             torch.nn.Dropout(p=1 - self.keep_prob))
         # L5 Final FC 625 inputs -> 10 outputs
-        self.fc2 = torch.nn.Linear(625, 100, bias=True)
+        self.fc2 = torch.nn.Linear(625, 100, bias=True) # mnist : 10
         torch.nn.init.xavier_uniform_(self.fc2.weight)
 
     def forward(self, x):

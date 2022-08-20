@@ -25,6 +25,6 @@ model = CNN.CNN().to(device)
 loss = torch.nn.CrossEntropyLoss().to(device)    # CEL 비용 함수에 소프트맥스 함수 포함되어져 있음.
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-data = call_data_CIFAR(100,100)
+data = call_data_CIFAR100(32,32)
 
 run(model,loss,optimizer,device,train_loader = data[0], test_loader = data[1],epochs = epochs,log_interval=100)
